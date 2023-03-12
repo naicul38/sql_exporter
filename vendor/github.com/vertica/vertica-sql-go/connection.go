@@ -383,14 +383,11 @@ func (v *connection) handshake() error {
 		return fmt.Errorf("connection string must have a non-empty user name")
 	}
 
-	path := v.connURL.Path[1:]
-
 	msg := &msgs.FEStartupMsg{
 		ProtocolVersion: protocolVersion,
 		DriverName:      driverName,
 		DriverVersion:   driverVersion,
 		Username:        userName,
-		Database:        path,
 		SessionID:       v.sessionID,
 		ClientPID:       v.clientPID,
 	}
