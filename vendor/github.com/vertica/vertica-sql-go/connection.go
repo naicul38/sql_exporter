@@ -306,10 +306,6 @@ func (v *connection) handshake() error {
 		return fmt.Errorf("connection string must have a non-empty user name")
 	}
 
-	if len(v.connURL.Path) <= 1 {
-		return fmt.Errorf("connection string must include a database name")
-	}
-
 	path := v.connURL.Path[1:]
 
 	msg := &msgs.FEStartupMsg{

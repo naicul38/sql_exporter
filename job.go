@@ -51,7 +51,7 @@ func (j *Job) Init(logger log.Logger, queries map[string]string) error {
 		if q.metrics == nil {
 			// we have no way of knowing how many metrics will be returned by the
 			// queries, so we just assume that each query returns at least one metric.
-			// after the each round of collection this will be resized as necessary.
+			// after each round of collection this will be resized as necessary.
 			q.metrics = make(map[*connection][]prometheus.Metric, len(j.Queries))
 		}
 		// try to satisfy prometheus naming restrictions
@@ -84,7 +84,7 @@ func (j *Job) updateConnections() {
 	if j.conns == nil {
 		j.conns = make([]*connection, 0, len(j.Connections))
 	}
-	// parse the connection URLs and create an connection object for each
+	// parse the connection URLs and create a connection object for each
 	if len(j.conns) < len(j.Connections) {
 		for _, conn := range j.Connections {
 			// MySQL DSNs do not parse cleanly as URLs as of Go 1.12.8+
@@ -113,7 +113,7 @@ func (j *Job) updateConnections() {
 			if u.User != nil {
 				user = u.User.Username()
 			}
-			// we expose some of the connection variables as labels, so we need to
+			// we expose some connection variables as labels, so we need to
 			// remember them
 			newConn := &connection{
 				conn:     nil,
